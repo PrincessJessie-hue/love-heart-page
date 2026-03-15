@@ -38,9 +38,8 @@ canvas{
 <div id="name">Ntsika Zulu 💗</div>
 
 <!-- Background Music -->
-<audio id="bg-music" autoplay loop>
+<audio id="bg-music" loop>
   <source src="mp3/Jk.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
 </audio>
 
 <script>
@@ -98,15 +97,18 @@ draw();
 
 // Click interaction
 document.addEventListener("click",(e)=>{
+  // Show the name at click
   names.push({
     x:e.clientX,
     y:e.clientY,
     opacity:1
   });
 
-  // Optional: start music on first click for browsers that block autoplay
+  // Start music if it hasn't started yet
   const music = document.getElementById("bg-music");
-  if(music.paused) music.play();
+  if(music.paused){
+    music.play().catch(err => console.log("Autoplay blocked:", err));
+  }
 });
 </script>
 
